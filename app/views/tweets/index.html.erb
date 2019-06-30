@@ -1,0 +1,6 @@
+<div class="center"><h1>散歩の記録</h1></div>
+  <script type="text/javascript" src="./app.js"></script>
+  <% @tweets.each do |tweet| %>
+    <%= render partial: "tweet", locals:{tweet: tweet} %>
+  <% end %>
+  
