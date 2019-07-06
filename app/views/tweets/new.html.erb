@@ -1,0 +1,15 @@
+<div class="contents row">
+  <div class="container">
+    <%= form_for(@tweet) do |f| %>
+      <h3>
+        投稿する
+      </h3>
+      <%= f.text_field :text, placeholder: "お散歩メモ" %>
+      <%= f.text_field :image, placeholder: "画像Url" %>
+      <%= f.number_field :steps, placeholder: "何歩歩いたかな?" %>
+        <%= button_tag type: "submit" do %>
+          投稿する
+        <% end %>
+    <% end %>
+  </div>
+</div>
