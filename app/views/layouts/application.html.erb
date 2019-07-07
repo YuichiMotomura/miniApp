@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sample</title>
+  <title>お写ん歩Walking</title>
   <style type="text.css" href="./style.css"></style>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -15,7 +15,7 @@
 <body>
   <nav>
     <div class="nav-wrapper #64ffda teal accent-2">
-      <%= link_to "お写ん歩 Walking" , root_path, class: "brand-logo" %>
+      <%= link_to "お写ん歩 Walking" , root_path, class: "brand-logo center" %>
         <% if user_signed_in? %>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
@@ -41,7 +41,6 @@
         <% end %>
     </div>
   </nav>
-
    <%= yield %>
 </body>
 </html>
