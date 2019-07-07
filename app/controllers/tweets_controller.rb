@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
-
-  # before_action :move_to_index, except: :index
+  # binding.pry
+  before_action :move_to_index, except: :index
 
   def index
     @tweets = Tweet.order("created_at DESC").page(params[:page]).per(5)
@@ -11,15 +11,36 @@ class TweetsController < ApplicationController
   end
 
   def create
-    tweet = tweet_params
-    Tweet.create(text: tweet[:text], image: tweet[:image], steps: tweet[:steps], user_id: tweet[:user_id])
+    Tweet.create(tweet_params)
+    redirect_to action: :index
+  end
+
+  def edit
+    @tweet = Tweet.find(params[:id])
+  end
+
+  def update
+    @tweet = Tweet.find(params[:id])
+    @tweet.update(tweet_params) if @tweet.user_id == current_user.id
+    redirect_to action: :index
+  end
+
+  def destroy
+    tweet = Tweet.find(params[:id])
+    tweet.destroy if tweet.user_id == current_user.id
     redirect_to action: :index
   end
 
   private
 
   def tweet_params
-    params.require(:tweet).permit(:text, :image, :steps).merge(user_id: current_user.id)
+    minutes = params.require(:tweet).permit(:minutes)[:minutes].to_i
+    weight = current_user.weight
+    params.require(:tweet).permit(:text, :image, :minutes).merge(user_id: current_user.id, calorie: calculate_calorie(weight, minutes))
+  end
+
+  def calculate_calorie(weight, minutes)
+    calorie = (3 * weight * minutes / 60 * 1.05).floor(0)
   end
 
   def move_to_index

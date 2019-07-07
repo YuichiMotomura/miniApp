@@ -2,9 +2,9 @@
   <div class="container">
     <%= form_for(@tweet) do |f| %>
       <h3>
-        投稿する
+        編集する
       </h3>
-      <%= f.text_area :text, placeholder: "お散歩メモ" %>
+      <%= f.text_field :text, placeholder: "お散歩メモ" %>
       <%= f.file_field :image, placeholder: "画像ファイル選択" %>
       <%= f.number_field :minutes, placeholder: "何分歩いたかな?" %>
         <%= button_tag type: "submit" do %>

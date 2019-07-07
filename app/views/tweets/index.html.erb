@@ -1,6 +1,8 @@
-<div class="center"><h1>散歩の記録</h1></div>
+<%# <div class="center"><h3>お散歩日記</h3></div> %>
+<br><br>
   <script type="text/javascript" src="./app.js"></script>
-  <% @tweets.each do |tweet| %>
-    <%= render partial: "tweet", locals:{tweet: tweet} %>
-  <% end %>
+    <% @tweets.each do |tweet| %>
+      <%= render partial: "tweet", locals:{tweet: tweet} %>
+    <% end %>
+  <%= paginate(@tweets) %>
   

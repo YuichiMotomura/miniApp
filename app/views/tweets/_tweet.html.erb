@@ -2,17 +2,45 @@
   <div class="col s6 offset-s3">
     <div class="card">
       <div class="card-image">
-        <img src="./images/DSC04059.JPG">
+        <%= image_tag tweet.image.url if tweet.image.present? %>
       </div>
       <div class="card-content">
-        <p>鯉のぼりがとても綺麗でした</p><br>
-        <p>歩いた日：2019.6.30</a>
-        <p>消費カロリー：300kcal</a>
+        <%= simple_format(tweet.text) %><br>
+        <p>歩いた日：<%= tweet.created_at.strftime("%Y/%m/%d %H:%M") %></p>
+        <p>消費カロリー：<%= tweet.calorie %>[kcal]</p>
       </div>
-      <div class="card-action">
-
-        <a href="#">投稿者：yuichi</a>
+      <div class="card-action btns" id="fabs">
+        <%= link_to "投稿者:#{tweet.user.name}", "/users/#{tweet.user_id}", class: "name" %>
+        <% if user_signed_in? && current_user == tweet.user %>
+          <ul>
+            <li>
+              <%= link_to '編集', edit_tweet_path(tweet.id), method: :get, class: 'btn', id: 'fab' %>
+            </li>
+            <li>
+              <%= button_to '削除', "/tweets/#{tweet.id}", method: :delete, class: 'btn', id: 'fab' %>
+            </li>
+          </ul>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+#fabs li {
+  display: inline-block;
+  list-style: none;
+  float: right;
+  margin-right: 5px;
+}
+
+#fabs {
+  height: 90px;
+}
+
+.name {
+  display: inline;
+  float: left;
+  line-height: 57px;
+}
+</style>
